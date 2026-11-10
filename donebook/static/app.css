@@ -367,6 +367,12 @@ button, input, textarea, select { font: inherit; color: inherit; }
 }
 .stack-grow { flex: 1; overflow-y: auto; }
 
+/* Running late scrolls on its own, capped so a bad day can't push
+   Unscheduled off the rail. Without this the stack overflowed and the rail
+   clipped it, leaving the tail of the list unreachable. */
+#overdue-block { flex: 0 1 auto; max-height: 50%; }
+#overdue-list { flex: 0 1 auto; min-height: 0; overflow-y: auto; padding-bottom: 12px; }
+
 .empty-hint {
   margin: 6px 2px;
   font-size: 12.5px;
@@ -976,6 +982,8 @@ button, input, textarea, select { font: inherit; color: inherit; }
   }
   .rail-grow { flex: 0 0 auto; }
   .stack-grow { flex: 0 0 auto; max-height: 40vh; overflow-y: auto; }
+  #overdue-block { max-height: none; }
+  #overdue-list { max-height: 40vh; }
 
   /* No definite heights below here — the page itself does the scrolling. */
   .calendar { flex: 0 0 auto; min-height: 0; overflow: visible; }
